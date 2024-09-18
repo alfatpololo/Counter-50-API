@@ -1,0 +1,28 @@
+const express = require('express');
+const cors = require('cors');
+const app = express();
+app.use(cors()); // Memungkinkan komunikasi lintas asal (CORS)
+
+let counterValue = 50; // Inisialisasi counter
+
+// Function untuk mengurangi counter
+function decrementCounter() {
+  if (counterValue > 0) {
+    counterValue -= 5; // Kurangi counter sebanyak 4 setiap kali dipanggil
+  } else {
+    // Ketika counter mencapai 0, tunggu 1 menit dan reset kembali ke 200
+    setTimeout(() => {
+      counterValue = 50; // Reset counter ke 200 setelah 1 menit
+    }, 60000); // 60000 ms = 1 menit
+  }
+}
+
+// Jalankan decrementCounter setiap 1 menit (60000 ms)
+setInterval(decrementCounter, 60000); // Mengurangi counter setiap 1 menit
+
+// Endpoint untuk mengambil nilai counter saat ini
+app.get('/get-counter', (req, res) => {
+  res.json({ count: counterValue });
+});
+
+module.exports = app; // Ekspor aplikasi Express untuk Vercel
