@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors()); // Memungkinkan komunikasi lintas asal (CORS)
 
-let counterValue = 20; // Inisialisasi counter dimulai dari 180
+let counterValue = 15; // Inisialisasi counter dimulai dari 180
 let lastDecrementDate = new Date(); // Waktu terakhir decrement (default ke sekarang)
 
 // Helper function untuk mendapatkan waktu di zona WIB (UTC+7)
@@ -29,7 +29,7 @@ function hasPassed8AMWIB() {
 // Function untuk mengurangi counter jika sudah lewat jam 8 pagi WIB
 function updateCounterIfNeeded() {
   if (hasPassed8AMWIB() && counterValue > 0) {
-    counterValue -= 5; // Kurangi counter sebanyak 4
+    counterValue -= 4; // Kurangi counter sebanyak 4
     if (counterValue < 0) {
       counterValue = 0; // Pastikan counter tidak kurang dari 0
     }
